@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ક્વોટેશન અને બીલ જનરેટર</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="header">
+    <div class="logo-title-container">
+        <img src="img/logo.png" alt="Logo" class="logo">
+        <h1 class="header-title">રામદેવ વૂડ વર્ક્સ</h1>
+    </div>
+    <div class="address-container">પંચાયત ઓફિસ પાછળ, સુંદણ - ૩૮૮૩૦૫</div>
+    <div class="mobile-no-container">મદનલાલ સુથાર : ૯૭૨૭૩૩૪૬૩૫ | ભૈરવ સુથાર : ૭૬૯૮૭૩૫૮૬૪</div>
+    <div class="services-container">
+        અમારે ત્યાં દરેક પ્રકારના પલંગ, ટીવી કેબીનેટ, સોકેસ, રસોડાનું ફર્નીચર,
+        બેડરૂમ ફર્નીચર, સોફા, ડ્રેસિંગ ટેબલ, પાર્ટીશન, માળીયા, કબાટ, દરવાજા,
+        દુકાનના ફર્નીચર વગેરે ઉચ્ચક તથા વ્યાજબી ભાવે બનાવી આપીશું.
+    </div>
+</header>
+
+<div class="capsule-toggle-btn-section">
+    <div class="capsule-toggle">
+        <div class="toggle-option active" onclick="setMode('quotation')">ક્વોટેશન</div>
+        <div class="toggle-option" onclick="setMode('bill')">બીલ</div>
+    </div>
+</div>
+
+<main class="main-section">
+    <div class="bill-quation-header-title">
+        <h2 id="billTitle">રામદેવ વૂડ વર્ક્સ ક્વોટેશન</h2>
+    </div>
+
+    <section class="customer-bill-info">
+        <div class="form-group">
+            <label for="customerName">ગ્રાહકનું નામ:</label>
+            <input type="text" id="customerName" placeholder="ગ્રાહકનું નામ લખો">
+        </div>
+        <div class="form-group">
+            <label for="customerMobile">મોબાઇલ નંબર:</label>
+            <input type="text" id="customerMobile" placeholder="મોબાઇલ નંબર લખો">
+        </div>
+        <div class="form-group">
+            <label for="customerAddress">સરનામું:</label>
+            <input type="text" id="customerAddress" placeholder="સરનામું લખો">
+        </div>
+        <div class="form-group">
+            <label for="billDate">તારીખ:</label>
+            <input type="date" id="billDate">
+        </div>
+        <div class="form-group bill-only">
+            <label for="startDate">કામ શરૂ કરવાની તારીખ:</label>
+            <input type="date" id="startDate">
+        </div>
+        <div class="form-group bill-only">
+            <label for="endDate">કામ પૂર્ણ કરવાની તારીખ:</label>
+            <input type="date" id="endDate">
+        </div>
+        <div class="form-group">
+            <label for="billNumber">ક્વોટેશન/બીલ નં:</label>
+            <input type="text" id="billNumber" value="AUTO" readonly>
+        </div>
+    </section>
+
+    <section class="table-container">
+        <table class="items-table">
+            <thead>
+                <tr>
+                    <th>ક્રમ</th>
+                    <th>વિગત</th>
+                    <th>નંગ</th>
+                    <th>માપ</th>
+                    <th>ચો.ફૂટ</th>
+                    <th>રૂપિયા</th>
+                </tr>
+            </thead>
+            <tbody id="itemsBody">
+                <tr>
+                    <td>1</td>
+                    <td><input type="text"></td>
+                    <td><input type="number" value="0"></td>
+                    <td><input type="text"></td>
+                    <td><input type="number" value="0"></td>
+                    <td><input type="number" value="0"></td>
+                </tr>
+            </tbody>
+        </table>
+        <button class="add-row">+ વસ્તુ ઉમેરો</button>
+    </section>
+
+    <section class="vadharanukam-container">
+        <h3>વધારાનું કામ</h3>
+        <table class="extra-work-table">
+            <thead>
+                <tr>
+                    <th>ક્રમ</th>
+                    <th>વિગત</th>
+                    <th>રૂપિયા</th>
+                </tr>
+            </thead>
+            <tbody id="extraWorkBody">
+                <tr>
+                    <td>1</td>
+                    <td><input type="text"></td>
+                    <td><input type="number" value="0"></td>
+                </tr>
+            </tbody>
+        </table>
+        <button class="add-extra-row">+ કામ ઉમેરો</button>
+    </section>
+
+    <section class="total-cost-calc-container">
+        <div class="calc-row"><label>ટોટલ માલ-સમાન:</label><span id="totalMaterial">₹ 0</span></div>
+        <div class="calc-row"><label>મજૂરી:</label><input type="number" id="laborCost" value="0"></div>
+        <div class="calc-row"><label>ટોટલ માલ-સમાન સાથે:</label><span id="totalWithLabor">₹ 0</span></div>
+        <div class="calc-row"><label>ડિસ્કાઉન્ટ:</label><input type="number" id="discount" value="0"></div>
+        <div class="calc-row"><label>નક્કી કરેલ ભાવ:</label><input type="number" id="finalPrice" value="0"></div>
+        <div class="calc-row"><label>એડવાન્સ:</label><input type="number" id="advance" value="0"></div>
+        <div class="calc-row total"><label>ટોટલ બાકી:</label><span id="remaining">₹ 0</span></div>
+        <div class="calc-row words">
+            <label>શબ્દોમાં:</label>
+            <span id="amountInWords">-</span>
+        </div>
+    </section>
+</main>
+
+<footer class="footer-section">
+    <div class="client-sign-section">
+        <label>ગ્રાહક સહી:</label>
+        <canvas id="clientSignaturePad"></canvas>
+    </div>
+    <div class="ramdev-wood-work-sign">
+        <label>રામદેવ વૂડ વર્ક્સ સહી:</label>
+        <img src="/img/sign.png" alt="Owner Signature">
+    </div>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+<script src="/js/script.js"></script>
+</body>
+</html>
