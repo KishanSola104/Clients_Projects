@@ -1,0 +1,352 @@
+/* ===== Variables for Theme ===== */
+:root {
+    --bg-color: #fff;
+    --text-color: #333;
+    --secondary-text: #555;
+    --highlight-bg: #fef4e7;
+    --highlight-border: #f0d7b7;
+    --primary-color: #007bff;
+    --shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+body.dark-mode {
+    --bg-color: #121212;
+    --text-color: #f5f5f5;
+    --secondary-text: #ccc;
+    --highlight-bg: #1e1e1e;
+    --highlight-border: #333;
+    --shadow: 0 2px 8px rgba(255, 255, 255, 0.05);
+}
+
+/* ===== Header Container ===== */
+.header {
+    background: var(--bg-color);
+    text-align: center;
+    padding: 20px;
+    border-bottom: 2px solid var(--highlight-border);
+    font-family: 'Noto Sans Gujarati', sans-serif;
+    color: var(--text-color);
+    box-shadow: var(--shadow);
+}
+
+.logo-title-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.logo {
+    height: 70px;
+    width: auto;
+}
+
+.header-title {
+    font-size: 28px;
+    font-weight: bold;
+    margin: 0;
+    color: var(--text-color);
+}
+
+.address-container,
+.mobile-no-container {
+    font-size: 15px;
+    color: var(--secondary-text);
+    margin-bottom: 5px;
+}
+
+.services-container {
+    font-size: 14px;
+    background: var(--highlight-bg);
+    color: var(--text-color);
+    padding: 8px 12px;
+    border-radius: 6px;
+    max-width: 900px;
+    margin: 10px auto;
+    line-height: 1.6;
+    border: 1px solid var(--highlight-border);
+}
+
+/* Responsive Header */
+@media (max-width: 768px) {
+    .header-title {
+        font-size: 22px;
+    }
+    .services-container {
+        font-size: 13px;
+        padding: 6px 10px;
+    }
+    .mobile-no-container {
+        font-size: 14px;
+    }
+    .logo {
+        height: 60px;
+    }
+}
+
+/* ===== Capsule Toggle Section ===== */
+.capsule-toggle-btn-section {
+    display: flex;
+    justify-content: center;
+    margin: 15px 0;
+}
+
+.capsule-toggle {
+    display: flex;
+    background: var(--highlight-bg);
+    border: 2px solid var(--highlight-border);
+    border-radius: 50px;
+    overflow: hidden;
+    width: 260px;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+}
+
+.capsule-toggle .toggle-option {
+    flex: 1;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 16px;
+    color: var(--secondary-text);
+    transition: all 0.3s;
+    user-select: none;
+}
+
+.capsule-toggle .toggle-option.active {
+    background: var(--primary-color);
+    color: white;
+    font-weight: bold;
+}
+
+/* Dark Mode Toggle */
+body.dark-mode .capsule-toggle .toggle-option {
+    color: var(--secondary-text);
+}
+
+body.dark-mode .capsule-toggle .toggle-option.active {
+    background: #0d6efd;
+    color: white;
+}
+
+/* ===== Main Section ===== */
+.main-section {
+    background: var(--bg-color);
+    color: var(--text-color);
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 1000px;
+    border-radius: 8px;
+    border: 1px solid var(--highlight-border);
+    font-family: 'Noto Sans Gujarati', sans-serif;
+    box-shadow: var(--shadow);
+}
+
+/* Title */
+.bill-quation-header-title h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 26px;
+    font-weight: bold;
+    color: var(--text-color);
+    border-bottom: 2px solid var(--highlight-border);
+    padding-bottom: 10px;
+}
+
+/* ===== Customer Info ===== */
+.customer-bill-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.customer-bill-info .form-group label {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.customer-bill-info .form-group input {
+    width: 100%;
+    padding: 6px;
+    border: 1px solid var(--highlight-border);
+    border-radius: 4px;
+    background: var(--bg-color);
+    color: var(--text-color);
+}
+
+/* ===== Tables ===== */
+.table-container, .vadharanukam-container {
+    margin-top: 20px;
+    overflow-x: auto;
+}
+
+.items-table, .extra-work-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    min-width: 700px;
+}
+
+.items-table th, .items-table td,
+.extra-work-table th, .extra-work-table td {
+    border: 1px solid var(--highlight-border);
+    text-align: center;
+    padding: 6px;
+}
+
+.items-table th, .extra-work-table th {
+    background: var(--highlight-bg);
+    font-weight: 600;
+}
+
+.items-table input, .extra-work-table input {
+    width: 100%;
+    border: none;
+    text-align: center;
+    background: transparent;
+    outline: none;
+    color: var(--text-color);
+}
+
+/* Add Row Buttons */
+.add-row, .add-extra-row {
+    margin-top: 8px;
+    background: var(--primary-color);
+    color: white;
+    padding: 6px 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.add-row:hover, .add-extra-row:hover {
+    background: #0056b3;
+}
+
+/* ===== Totals Section ===== */
+.total-cost-calc-container {
+    margin-top: 20px;
+    padding: 12px;
+    border: 1px solid var(--highlight-border);
+    border-radius: 6px;
+    background: var(--highlight-bg);
+    box-shadow: var(--shadow);
+}
+
+.calc-row {
+    display: flex;
+    justify-content: space-between;
+    margin: 6px 0;
+    font-size: 15px;
+}
+
+.calc-row.total {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.calc-row.words {
+    font-size: 13px;
+    font-style: italic;
+}
+
+/* Dark Mode Tables */
+body.dark-mode .items-table th,
+body.dark-mode .extra-work-table th {
+    background: #1f1f1f;
+}
+
+body.dark-mode .add-row,
+body.dark-mode .add-extra-row {
+    background: #0d6efd;
+}
+
+body.dark-mode .customer-bill-info input,
+body.dark-mode .items-table input,
+body.dark-mode .extra-work-table input {
+    background: #1f1f1f;
+    color: #f5f5f5;
+    border: 1px solid #333;
+}
+
+/* Mobile Totals */
+@media (max-width: 768px) {
+    .calc-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+/* ===== Footer ===== */
+.footer-section {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    padding-top: 15px;
+    border-top: 2px solid var(--highlight-border);
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.client-sign-section,
+.ramdev-wood-work-sign {
+    text-align: center;
+    width: 45%;
+}
+
+.client-sign-section label,
+.ramdev-wood-work-sign label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+#clientSignaturePad {
+    width: 100%;
+    height: 80px;
+    border: 1px dashed var(--highlight-border);
+    background: #fff;
+}
+
+body.dark-mode #clientSignaturePad {
+    background: #fff;
+}
+
+.ramdev-wood-work-sign img {
+    width: 150px;
+    height: auto;
+}
+
+/* ===== Print Styles ===== */
+@media print {
+    body {
+        background: white;
+        color: black;
+    }
+    .capsule-toggle-btn-section, .add-row, .add-extra-row {
+        display: none;
+    }
+    .main-section {
+        box-shadow: none;
+        border: none;
+    }
+}
+
+/* Prevent breaking inside important sections */
+.main-section, 
+.table-container, 
+.vadharanukam-container, 
+.total-cost-calc-container,
+.footer-section {
+    page-break-inside: avoid;
+}
+
+/* Force a new page if needed */
+.page-break {
+    page-break-before: always;
+}
+
