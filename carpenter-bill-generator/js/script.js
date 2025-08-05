@@ -29,9 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const amountInWords = document.getElementById("amountInWords");
     const customerNameInput = document.getElementById("customerName");
 
-    /* =======================
-       1. Quotation / Bill Toggle
-    ======================= */
+    /*  1. Quotation / Bill Toggle */
     toggleOptions.forEach(option => {
         option.addEventListener("click", () => {
             toggleOptions.forEach(o => o.classList.remove("active"));
@@ -53,18 +51,14 @@ document.addEventListener("DOMContentLoaded", () => {
         generateBillNumber();
     }
 
-    /* =======================
-       2. Auto Bill/Quotation Number
-    ======================= */
+    /*   2. Auto Bill/Quotation Number */
     function generateBillNumber() {
         const prefix = mode === "bill" ? "BILL" : "QT";
         billNumber.value = `${prefix}-${Date.now().toString().slice(-6)}`;
     }
     generateBillNumber();
 
-    /* =======================
-       3. Add Row (Items Table)
-    ======================= */
+    /*   3. Add Row (Items Table)*/
     document.querySelector(".add-row").addEventListener("click", () => {
         const row = document.createElement("tr");
         row.innerHTML = `
@@ -79,9 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
         addValidationEvents(row);
     });
 
-    /* =======================
-       4. Add Row (Extra Work)
-    ======================= */
+    /*   4. Add Row (Extra Work) */
     document.querySelector(".add-extra-row").addEventListener("click", () => {
         const row = document.createElement("tr");
         row.innerHTML = `
@@ -93,9 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
         addValidationEvents(row);
     });
 
-   /* =======================
-   5. Validations (Number Only) + Auto Calculation
-======================= */
+   /*    5. Validations (Number Only)  */
 function addValidationEvents(container) {
     container.querySelectorAll(".num-field").forEach(input => {
         input.addEventListener("input", () => {
@@ -119,7 +109,7 @@ addValidationEvents(document);
 function calculateTotals() {
     let materialTotal = 0;
 
-    //  Items Table (Only Rupiya column)
+    //  Items Table ( Rupiya column)
     document.querySelectorAll("#itemsBody tr").forEach(row => {
         const rupiya = parseFloat(row.children[5].querySelector("input").value) || 0;
         materialTotal += rupiya;
@@ -157,9 +147,7 @@ function calculateTotals() {
 }
 
 
-    /* =======================
-       7. Convert Number to Gujarati Words
-    ======================= */
+    /*   7. Convert Number to Gujarati Words */
     function convertNumberToWords(num) {
         if (num <= 0) return "શૂન્ય";
 
@@ -185,9 +173,7 @@ function calculateTotals() {
         return words.trim();
     }
 
-    /* =======================
-       8. Professional Dark Mode Button
-    ======================= */
+    /*   8.  Dark Mode Button */
     const darkModeBtn = document.createElement("button");
     darkModeBtn.innerHTML = "🌙";
     darkModeBtn.classList.add("dark-mode-toggle");
@@ -198,9 +184,7 @@ function calculateTotals() {
         darkModeBtn.innerHTML = body.classList.contains("dark-mode") ? "☀️" : "🌙";
     });
 
-    /* =======================
-       9. Download PDF using html2pdf.js
-    ======================= */
+    /*   9. Download PDF using html2pdf.js*/
     const pdfBtn = document.createElement("button");
     pdfBtn.textContent = "⬇️ PDF ડાઉનલોડ કરો";
     pdfBtn.classList.add("download-pdf-btn");
@@ -264,3 +248,4 @@ pdfBtn.addEventListener("click", () => {
     // Initial calculation
     calculateTotals();
 });
+
