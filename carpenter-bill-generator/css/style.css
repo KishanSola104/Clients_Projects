@@ -1,31 +1,43 @@
-/* ===== Variables for Theme ===== */
+/*   THEME VARIABLES */
 :root {
-    --bg-color: #fff;
-    --text-color: #333;
-    --secondary-text: #555;
+    --bg-color: #ffffff;
+    --text-color: #333333;
+    --secondary-text: #666666;
     --highlight-bg: #fef4e7;
-    --highlight-border: #f0d7b7;
+    --highlight-border: #e0d7c7;
     --primary-color: #007bff;
+    --table-total-bg: #f9f9f9;
     --shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    --radius: 6px;
+    --font-gujarati: 'Noto Sans Gujarati', sans-serif;
 }
 
 body.dark-mode {
     --bg-color: #121212;
     --text-color: #f5f5f5;
-    --secondary-text: #ccc;
+    --secondary-text: #bbbbbb;
     --highlight-bg: #1e1e1e;
-    --highlight-border: #333;
+    --highlight-border: #333333;
+    --table-total-bg: #1b1b1b;
     --shadow: 0 2px 8px rgba(255, 255, 255, 0.05);
 }
 
-/* ===== Header Container ===== */
+/*  GLOBAL STYLES */
+body {
+    margin: 0;
+    font-family: var(--font-gujarati);
+    background: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.5;
+    transition: background 0.3s, color 0.3s;
+}
+
+/*  HEADER */
 .header {
     background: var(--bg-color);
     text-align: center;
     padding: 20px;
     border-bottom: 2px solid var(--highlight-border);
-    font-family: 'Noto Sans Gujarati', sans-serif;
-    color: var(--text-color);
     box-shadow: var(--shadow);
 }
 
@@ -34,7 +46,7 @@ body.dark-mode {
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 12px;
     margin-bottom: 10px;
 }
 
@@ -44,7 +56,7 @@ body.dark-mode {
 }
 
 .header-title {
-    font-size: 28px;
+    font-size: clamp(28px, 4vw, 60px);
     font-weight: bold;
     margin: 0;
     color: var(--text-color);
@@ -52,41 +64,23 @@ body.dark-mode {
 
 .address-container,
 .mobile-no-container {
-    font-size: 15px;
+    font-size: 16px;
     color: var(--secondary-text);
-    margin-bottom: 5px;
 }
 
 .services-container {
     font-size: 14px;
     background: var(--highlight-bg);
     color: var(--text-color);
-    padding: 8px 12px;
-    border-radius: 6px;
+    padding: 10px 14px;
+    border-radius: var(--radius);
     max-width: 900px;
-    margin: 10px auto;
-    line-height: 1.6;
+    margin: 12px auto;
     border: 1px solid var(--highlight-border);
+    line-height: 1.6;
 }
 
-/* Responsive Header */
-@media (max-width: 768px) {
-    .header-title {
-        font-size: 22px;
-    }
-    .services-container {
-        font-size: 13px;
-        padding: 6px 10px;
-    }
-    .mobile-no-container {
-        font-size: 14px;
-    }
-    .logo {
-        height: 60px;
-    }
-}
-
-/* ===== Capsule Toggle Section ===== */
+/*  CAPSULE TOGGLE */
 .capsule-toggle-btn-section {
     display: flex;
     justify-content: center;
@@ -120,30 +114,23 @@ body.dark-mode {
     font-weight: bold;
 }
 
-/* Dark Mode Toggle */
-body.dark-mode .capsule-toggle .toggle-option {
-    color: var(--secondary-text);
-}
-
 body.dark-mode .capsule-toggle .toggle-option.active {
     background: #0d6efd;
-    color: white;
 }
 
-/* ===== Main Section ===== */
+/*   MAIN SECTION */
 .main-section {
     background: var(--bg-color);
     color: var(--text-color);
     margin: 20px auto;
     padding: 20px;
     max-width: 1000px;
-    border-radius: 8px;
+    border-radius: var(--radius);
     border: 1px solid var(--highlight-border);
-    font-family: 'Noto Sans Gujarati', sans-serif;
     box-shadow: var(--shadow);
 }
 
-/* Title */
+/*   BILL TITLE */
 .bill-quation-header-title h2 {
     text-align: center;
     margin-bottom: 20px;
@@ -154,7 +141,7 @@ body.dark-mode .capsule-toggle .toggle-option.active {
     padding-bottom: 10px;
 }
 
-/* ===== Customer Info ===== */
+/*   CUSTOMER INFO */
 .customer-bill-info {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -165,43 +152,52 @@ body.dark-mode .capsule-toggle .toggle-option.active {
 .customer-bill-info .form-group label {
     font-size: 14px;
     font-weight: 500;
+    margin-bottom: 4px;
+    display: block;
 }
 
 .customer-bill-info .form-group input {
     width: 100%;
-    padding: 6px;
+    padding: 8px;
     border: 1px solid var(--highlight-border);
-    border-radius: 4px;
+    border-radius: var(--radius);
     background: var(--bg-color);
     color: var(--text-color);
+    font-size: 14px;
 }
 
-/* ===== Tables ===== */
-.table-container, .vadharanukam-container {
+/* TABLES */
+.table-container,
+.vadharanukam-container {
     margin-top: 20px;
     overflow-x: auto;
 }
 
-.items-table, .extra-work-table {
+.items-table,
+.extra-work-table {
     width: 100%;
     border-collapse: collapse;
     font-size: 14px;
     min-width: 700px;
 }
 
-.items-table th, .items-table td,
-.extra-work-table th, .extra-work-table td {
+.items-table th,
+.items-table td,
+.extra-work-table th,
+.extra-work-table td {
     border: 1px solid var(--highlight-border);
     text-align: center;
     padding: 6px;
 }
 
-.items-table th, .extra-work-table th {
+.items-table th,
+.extra-work-table th {
     background: var(--highlight-bg);
     font-weight: 600;
 }
 
-.items-table input, .extra-work-table input {
+.items-table input,
+.extra-work-table input {
     width: 100%;
     border: none;
     text-align: center;
@@ -210,28 +206,44 @@ body.dark-mode .capsule-toggle .toggle-option.active {
     color: var(--text-color);
 }
 
-/* Add Row Buttons */
-.add-row, .add-extra-row {
+/* TABLE TOTAL ROW  */
+.table-total-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--table-total-bg);
+    border: 1px solid var(--highlight-border);
+    margin-top: 0;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 0 0 var(--radius) var(--radius);
+    padding: 6px 10px;
+}
+
+/*  ADD ROW BUTTONS */
+.add-row,
+.add-extra-row {
     margin-top: 8px;
     background: var(--primary-color);
     color: white;
-    padding: 6px 14px;
+    padding: 8px 14px;
     border: none;
-    border-radius: 4px;
+    border-radius: var(--radius);
     cursor: pointer;
     transition: background 0.3s;
 }
 
-.add-row:hover, .add-extra-row:hover {
+.add-row:hover,
+.add-extra-row:hover {
     background: #0056b3;
 }
 
-/* ===== Totals Section ===== */
+/*   TOTAL COST SECTION */
 .total-cost-calc-container {
     margin-top: 20px;
     padding: 12px;
     border: 1px solid var(--highlight-border);
-    border-radius: 6px;
+    border-radius: var(--radius);
     background: var(--highlight-bg);
     box-shadow: var(--shadow);
 }
@@ -239,6 +251,7 @@ body.dark-mode .capsule-toggle .toggle-option.active {
 .calc-row {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin: 6px 0;
     font-size: 15px;
 }
@@ -253,34 +266,7 @@ body.dark-mode .capsule-toggle .toggle-option.active {
     font-style: italic;
 }
 
-/* Dark Mode Tables */
-body.dark-mode .items-table th,
-body.dark-mode .extra-work-table th {
-    background: #1f1f1f;
-}
-
-body.dark-mode .add-row,
-body.dark-mode .add-extra-row {
-    background: #0d6efd;
-}
-
-body.dark-mode .customer-bill-info input,
-body.dark-mode .items-table input,
-body.dark-mode .extra-work-table input {
-    background: #1f1f1f;
-    color: #f5f5f5;
-    border: 1px solid #333;
-}
-
-/* Mobile Totals */
-@media (max-width: 768px) {
-    .calc-row {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-}
-
-/* ===== Footer ===== */
+/* FOOTER */
 .footer-section {
     display: flex;
     justify-content: space-between;
@@ -321,13 +307,15 @@ body.dark-mode #clientSignaturePad {
     height: auto;
 }
 
-/* ===== Print Styles ===== */
+/*  PRINT */
 @media print {
     body {
         background: white;
         color: black;
     }
-    .capsule-toggle-btn-section, .add-row, .add-extra-row {
+    .capsule-toggle-btn-section,
+    .add-row,
+    .add-extra-row {
         display: none;
     }
     .main-section {
@@ -336,17 +324,27 @@ body.dark-mode #clientSignaturePad {
     }
 }
 
-/* Prevent breaking inside important sections */
-.main-section, 
-.table-container, 
-.vadharanukam-container, 
-.total-cost-calc-container,
-.footer-section {
-    page-break-inside: avoid;
+
+/*  header title bigger in PDF */
+@media print {
+    .header-title {
+        font-size: 80px !important; 
+    }
 }
 
-/* Force a new page if needed */
-.page-break {
-    page-break-before: always;
-}
-
+ /* Bordered total rows */
+        .table-total-row {
+            display: flex;
+            justify-content: space-between;
+            border: 1px solid var(--highlight-border);
+            padding: 6px 10px;
+            background: var(--highlight-bg);
+            font-weight: bold;
+            margin-top: 5px;
+        }
+        .table-total-row label {
+            font-size: 14px;
+        }
+        .table-total-row span {
+            font-size: 14px;
+        }

@@ -36,46 +36,21 @@
     </div>
 
     <section class="customer-bill-info">
-        <div class="form-group">
-            <label for="customerName">ગ્રાહકનું નામ:</label>
-            <input type="text" id="customerName" placeholder="ગ્રાહકનું નામ લખો">
-        </div>
-        <div class="form-group">
-            <label for="customerMobile">મોબાઇલ નંબર:</label>
-            <input type="text" id="customerMobile" placeholder="મોબાઇલ નંબર લખો">
-        </div>
-        <div class="form-group">
-            <label for="customerAddress">સરનામું:</label>
-            <input type="text" id="customerAddress" placeholder="સરનામું લખો">
-        </div>
-        <div class="form-group">
-            <label for="billDate">તારીખ:</label>
-            <input type="date" id="billDate">
-        </div>
-        <div class="form-group bill-only">
-            <label for="startDate">કામ શરૂ કરવાની તારીખ:</label>
-            <input type="date" id="startDate">
-        </div>
-        <div class="form-group bill-only">
-            <label for="endDate">કામ પૂર્ણ કરવાની તારીખ:</label>
-            <input type="date" id="endDate">
-        </div>
-        <div class="form-group">
-            <label for="billNumber">ક્વોટેશન/બીલ નં:</label>
-            <input type="text" id="billNumber" value="AUTO" readonly>
-        </div>
+        <div class="form-group"><label for="customerName">ગ્રાહકનું નામ:</label><input type="text" id="customerName"></div>
+        <div class="form-group"><label for="customerMobile">મોબાઇલ નંબર:</label><input type="text" id="customerMobile"></div>
+        <div class="form-group"><label for="customerAddress">સરનામું:</label><input type="text" id="customerAddress"></div>
+        <div class="form-group"><label for="billDate">તારીખ:</label><input type="date" id="billDate"></div>
+        <div class="form-group bill-only"><label for="startDate">કામ શરૂ કરવાની તારીખ:</label><input type="date" id="startDate"></div>
+        <div class="form-group bill-only"><label for="endDate">કામ પૂર્ણ કરવાની તારીખ:</label><input type="date" id="endDate"></div>
+        <div class="form-group"><label for="billNumber">ક્વોટેશન/બીલ નં:</label><input type="text" id="billNumber" readonly></div>
     </section>
 
+    <!-- Items Table -->
     <section class="table-container">
         <table class="items-table">
             <thead>
                 <tr>
-                    <th>ક્રમ</th>
-                    <th>વિગત</th>
-                    <th>નંગ</th>
-                    <th>માપ</th>
-                    <th>ચો.ફૂટ</th>
-                    <th>રૂપિયા</th>
+                    <th>ક્રમ</th><th>વિગત</th><th>નંગ</th><th>માપ</th><th>ચો.ફૂટ</th><th>રૂપિયા</th>
                 </tr>
             </thead>
             <tbody id="itemsBody">
@@ -85,34 +60,42 @@
                     <td><input type="number" value="0"></td>
                     <td><input type="text"></td>
                     <td><input type="number" value="0"></td>
-                    <td><input type="number" value="0"></td>
+                    <td><input type="number" value="0" class="num-field"></td>
                 </tr>
             </tbody>
         </table>
+        <div class="table-total-row">
+            <label>ટોટલ માલ-સામાન ખર્ચ:</label>
+            <span id="itemsTotalCost">₹ 0</span>
+        </div>
         <button class="add-row">+ વસ્તુ ઉમેરો</button>
     </section>
 
+    <!-- Extra Work Table -->
     <section class="vadharanukam-container">
         <h3>વધારાનું કામ</h3>
         <table class="extra-work-table">
             <thead>
                 <tr>
-                    <th>ક્રમ</th>
-                    <th>વિગત</th>
-                    <th>રૂપિયા</th>
+                    <th>ક્રમ</th><th>વિગત</th><th>રૂપિયા</th>
                 </tr>
             </thead>
             <tbody id="extraWorkBody">
                 <tr>
                     <td>1</td>
                     <td><input type="text"></td>
-                    <td><input type="number" value="0"></td>
+                    <td><input type="number" value="0" class="num-field"></td>
                 </tr>
             </tbody>
         </table>
+        <div class="table-total-row">
+            <label>વધારાનું કામનો ખર્ચ:</label>
+            <span id="extraWorkTotalCost">₹ 0</span>
+        </div>
         <button class="add-extra-row">+ કામ ઉમેરો</button>
     </section>
 
+    <!-- Total Calculation -->
     <section class="total-cost-calc-container">
         <div class="calc-row"><label>ટોટલ માલ-સમાન:</label><span id="totalMaterial">₹ 0</span></div>
         <div class="calc-row"><label>મજૂરી:</label><input type="number" id="laborCost" value="0"></div>
@@ -121,10 +104,7 @@
         <div class="calc-row"><label>નક્કી કરેલ ભાવ:</label><input type="number" id="finalPrice" value="0"></div>
         <div class="calc-row"><label>એડવાન્સ:</label><input type="number" id="advance" value="0"></div>
         <div class="calc-row total"><label>ટોટલ બાકી:</label><span id="remaining">₹ 0</span></div>
-        <div class="calc-row words">
-            <label>શબ્દોમાં:</label>
-            <span id="amountInWords">-</span>
-        </div>
+        <div class="calc-row words"><label>શબ્દોમાં:</label><span id="amountInWords">-</span></div>
     </section>
 </main>
 
@@ -138,8 +118,11 @@
         <img src="/img/sign.png" alt="Owner Signature">
     </div>
 </footer>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
-<script src="/js/script.js"></script>
+<script src="/js/script.js">
+
+</script>
 </body>
 </html>
