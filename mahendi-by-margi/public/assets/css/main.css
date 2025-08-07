@@ -489,7 +489,7 @@ body.dark-mode .learn-more-btn {
 /* Grid Layout */
 .expertise-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 cards per row */
+  grid-template-columns: repeat(3, 1fr); 
   gap: 30px;
   max-width: 1200px;
   width: 100%;
@@ -549,12 +549,102 @@ body.dark-mode .learn-more-btn {
 /* Responsive */
 @media (max-width: 992px) {
   .expertise-grid {
-    grid-template-columns: repeat(2, 1fr); /* 2 per row on tablets */
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 600px) {
   .expertise-grid {
-    grid-template-columns: 1fr; /* 1 per row on mobile */
+    grid-template-columns: 1fr; 
   }
 }
+
+
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translateX(-50px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeInRight {
+  from { opacity: 0; transform: translateX(50px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeInBottom {
+  from { opacity: 0; transform: translateY(50px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Initial state */
+.expertise-box {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* On hover – lift */
+.expertise-box:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(5, 17, 69, 0.1);
+}
+
+/* Visible states with animations */
+.expertise-box.visible.animate-left {
+  animation: fadeInLeft 1s ease forwards;
+}
+
+.expertise-box.visible.animate-right {
+  animation: fadeInRight 1s ease forwards;
+}
+
+.expertise-box.visible.animate-bottom {
+  animation: fadeInBottom 1s ease forwards;
+}
+
+
+
+.explore-btn {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #a0522d; 
+  color: #fff;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: background 0.3s ease;
+}
+
+.explore-btn:hover {
+  background-color: #8b4513;
+}
+
+/* View Toggle Wrapper */
+.view-toggle-wrapper {
+  text-align: center;
+  margin-top: 30px;
+}
+
+/* View More / View Less Button */
+.toggle-btn {
+  background-color: #a0522d;
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.toggle-btn:hover {
+  background-color: #8b4513;
+}
+
+/* Hidden toggle state - cleaner hiding to preserve layout */
+.expertise-box.hidden {
+  display: none !important;
+}
+
+
+/* My Work Section */
