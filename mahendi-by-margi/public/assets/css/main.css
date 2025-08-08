@@ -448,7 +448,6 @@ body.dark-mode .learn-more-btn {
 
 
 /* expertise section */
-/* Section Wrapper */
 .expertise-section {
   display: flex;
   flex-direction: column;
@@ -648,3 +647,259 @@ body.dark-mode .learn-more-btn {
 
 
 /* My Work Section */
+.my-work-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px 16px;
+  background-color: var(--vId-color-token-c);
+  background-image: url('images/background-pattern.png');
+  background-position: 0% 100%;
+  background-size: 15% auto;
+  background-repeat: no-repeat;
+}
+
+/* Header */
+.my-work-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.my-work-subtitle {
+  font-family: var(--vId-font-token-a);
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--vId-color-token-b);
+  margin-bottom: 8px;
+  line-height: 30px;
+}
+
+
+/* Grid Layout */
+.my-work-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columns */
+  gap: 30px;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto; /* Center grid */
+  background: transparent; /* Use page's background */
+}
+
+/* Work Box Card */
+.my-work-box {
+  background: var(--vId-color-token-c); /* Matches your site’s card color */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: left; 
+  padding: 30px; 
+  border-radius: 0;
+  transition: box-shadow 0.3s ease;
+  max-width: 300px; 
+}
+
+.my-work-box:hover {
+  box-shadow: 0 20px 40px rgba(5, 17, 69, 0.1);
+}
+
+/* Image Container */
+.my-work-image {
+  width: 100%;
+  height: 160px; 
+  overflow: hidden;
+  margin-bottom: 10px; 
+}
+
+.my-work-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Title */
+.my-work-item-title {
+  font-family: var(--vId-font-token-a);
+  font-size: 20px; 
+  font-weight: 700;
+  color: var(--vId-color-token-b);
+  line-height: 28px;
+  margin-bottom: 5px;
+  text-align: left; 
+  width: 100%;
+}
+
+/* Description */
+.my-work-description {
+  font-family: var(--vId-font-token-a);
+  font-size: 14px; 
+  font-weight: 400;
+  color: var(--vId-color-token-d);
+  line-height: 22px;
+  margin-bottom: 15px;
+  text-align: left; 
+  width: 100%;
+}
+
+/* Button inside box */
+.my-work-box .btn {
+  margin: 0 auto; 
+  display: block;
+}
+
+
+/* Responsive */
+@media (max-width: 992px) {
+  .my-work-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .my-work-grid {
+    grid-template-columns: 1fr; 
+  }
+}
+
+
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translateX(-50px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeInRight {
+  from { opacity: 0; transform: translateX(50px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeInBottom {
+  from { opacity: 0; transform: translateY(50px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Initial state */
+.my-work-box{
+  opacity: 0;
+  transform: translateY(20px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* On hover – lift */
+.my-work-box:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(5, 17, 69, 0.1);
+}
+
+/* Visible states with animations */
+.my-work-box.visible.animate-left {
+  animation: fadeInLeft 1s ease forwards;
+}
+
+.my-work-box.visible.animate-right {
+  animation: fadeInRight 1s ease forwards;
+}
+
+.my-work-box.visible.animate-bottom {
+  animation: fadeInBottom 1s ease forwards;
+}
+
+
+
+.book-btn {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #a0522d; 
+  color: #fff;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: background 0.3s ease;
+}
+
+.book-btn:hover {
+  background-color: #8b4513;
+}
+
+/* View Toggle Wrapper */
+.view-toggle-wrapper {
+  text-align: center;
+  margin-top: 30px;
+}
+
+/* View More / View Less Button */
+.toggle-btn {
+  background-color: #a0522d;
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.toggle-btn:hover {
+  background-color: #8b4513;
+}
+
+/* Hidden toggle state - cleaner hiding to preserve layout */
+.my-work-box.hidden {
+  display: none !important;
+}
+
+
+
+/* experience section */
+/* Experience Section */
+.experience-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0; 
+    padding: 20px 0;
+    flex-wrap: wrap; 
+}
+
+.experience-item {
+    flex: 1;
+    text-align: center;
+    padding: 20px;
+    min-width: 150px; 
+}
+
+.experience-item h2 {
+    font-size: 2rem;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.experience-item p {
+    font-size: 1rem;
+    color: #666;
+}
+
+/* Add vertical lines between items */
+.experience-item:not(:first-child) {
+    border-left: 2px solid #ddd;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .experience-section {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .experience-item {
+        border-left: none; 
+        border-top: 2px solid #ddd; 
+    }
+
+    .experience-item:first-child {
+        border-top: none; 
+    }
+}
+
+
+/*  */
