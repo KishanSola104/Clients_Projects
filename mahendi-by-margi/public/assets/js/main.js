@@ -149,6 +149,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   setupToggle({ boxSelector: ".expertise-box", buttonId: "toggleViewBtn" });
   setupToggle({ boxSelector: ".my-work-box", buttonId: "toggleWorkViewBtn" });
+ 
 
   // experince section animation
   const items = document.querySelectorAll(".experience-item");
@@ -167,7 +168,100 @@ document.addEventListener("DOMContentLoaded", () => {
 
   items.forEach((item) => observer.observe(item));
 
-// 
+//testinomals
+   const testimonials = document.querySelectorAll(".testimonial-card");
+
+  const observer2 = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+      }
+    });
+  }, { threshold: 0.2 });
+
+  testimonials.forEach(card => observer.observe(card));
+
+  function setupTestimonialsToggle() {
+  const btn = document.getElementById("toggletestimonialReadBtn");
+  const cards = document.querySelectorAll(".testimonial-card");
+
+  function updateView() {
+    const w = window.innerWidth;
+    btn.textContent = "Read More";
+
+    cards.forEach(card => card.classList.remove("hidden"));
+
+    if (w > 992) {
+      // Laptop: show all, hide button
+      btn.style.display = "none";
+    } else if (w > 600) {
+      // Tablet: show 4, hide 2
+      btn.style.display = "inline-block";
+      cards.forEach((card, i) => {
+        if (i >= 4) card.classList.add("hidden");
+      });
+    } else {
+      // Mobile: show 2, hide 4
+      btn.style.display = "inline-block";
+      cards.forEach((card, i) => {
+        if (i >= 2) card.classList.add("hidden");
+      });
+    }
+  }
+
+  btn.addEventListener("click", () => {
+    const hiddenCards = document.querySelectorAll(".testimonial-card.hidden");
+    if (hiddenCards.length > 0) {
+      hiddenCards.forEach(card => card.classList.remove("hidden"));
+      btn.textContent = "Read Less";
+    } else {
+      updateView();
+    }
+  });
+
+  window.addEventListener("resize", updateView);
+  updateView();
+}
+
+setupTestimonialsToggle();
+
+
+/* FAQ */
+ const faqItems = document.querySelectorAll(".faq-item");
+
+  const observer3 = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1 }
+  );
+
+  faqItems.forEach(item => observer.observe(item));
+
+// Book Now
+const section = document.querySelector(".book-now-section");
+
+  const bookNowObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        section.classList.add("visible");
+        observer.unobserve(section);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  observer.observe(section);
+
+
+
 
 
 });
+
+ 
+ 
