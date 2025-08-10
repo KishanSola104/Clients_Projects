@@ -229,7 +229,7 @@ setupTestimonialsToggle();
 /* FAQ */
  const faqItems = document.querySelectorAll(".faq-item");
 
-  const observer3 = new IntersectionObserver(
+  const faqObserver = new IntersectionObserver(
     entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
