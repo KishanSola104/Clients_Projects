@@ -257,11 +257,85 @@ const section = document.querySelector(".book-now-section");
 
   observer.observe(section);
 
+  /* Booking Modal */
+  (function(){
+  const bookingModal = document.getElementById('booking-modal');
+  const closeBtn = bookingModal.querySelector('.close-btn');
+  // change this selector to whatever class your "Book Now" buttons have in the site
+  const bookNowButtons = document.querySelectorAll('.book-now-btn');
 
+  // Utility: open modal
+  function openBookingModal() {
+    bookingModal.style.display = 'flex';
+    bookingModal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('modal-open');
+    // focus first input for accessibility
+    const firstInput = bookingModal.querySelector('input, select, textarea');
+    if (firstInput) firstInput.focus();
+  }
 
+  // Utility: close modal
+  function closeBookingModal() {
+    bookingModal.style.display = 'none';
+    bookingModal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('modal-open');
+  }
 
+  // Attach open events
+  bookNowButtons.forEach(btn => {
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      openBookingModal();
+    });
+  });
 
+  // Attach close events
+  closeBtn.addEventListener('click', closeBookingModal);
+
+  // click outside the content (overlay) to close
+  bookingModal.addEventListener('click', function (e) {
+    if (e.target === bookingModal) closeBookingModal();
+  });
+
+  // close on Esc
+  window.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && bookingModal.getAttribute('aria-hidden') === 'false') {
+      closeBookingModal();
+    }
+  });
+
+  // Dynamic "Any Other" event type logic (fixed)
+  const eventTypeSelect = document.getElementById('eventType');
+  const otherEventTypeContainer = document.getElementById('otherEventTypeContainer');
+  const otherEventInput = document.getElementById('otherEventType');
+
+  if (eventTypeSelect) {
+    eventTypeSelect.addEventListener('change', function (e) {
+      if (e.target.value === 'Other') {
+        otherEventTypeContainer.style.display = 'block';
+        otherEventInput.required = true;
+      } else {
+        otherEventTypeContainer.style.display = 'none';
+        otherEventInput.required = false;
+      }
+    });
+  }
+
+  // OPTIONAL: trap focus inside modal (basic)
+  // For production you may want a robust focus trap library; this is a simple helper:
+  bookingModal.addEventListener('keydown', function(e) {
+    if (e.key !== 'Tab') return;
+    const focusable = bookingModal.querySelectorAll('a,button,input,select,textarea,[tabindex]:not([tabindex="-1"])');
+    if (!focusable.length) return;
+    const first = focusable[0], last = focusable[focusable.length -1];
+    if (e.shiftKey && document.activeElement === first) { last.focus(); e.preventDefault(); }
+    else if (!e.shiftKey && document.activeElement === last) { first.focus(); e.preventDefault(); }
+  });
+
+})();
+
+  
 });
 
- 
+
  
