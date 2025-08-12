@@ -1363,16 +1363,16 @@ body.dark-mode .learn-more-btn {
 
 
 /* booking modal */
-/* Modal overlay (centers content + blurs background using backdrop-filter) */
+/* Modal overlay  */
 .booking-modal {
-  display: none;                 /* show via JS */
+  display: none;                
   position: fixed;
   inset: 0;
   z-index: 9999;
   align-items: center;
   justify-content: center;
-  background: rgba(0,0,0,0.45);  /* fallback overlay color */
-  backdrop-filter: blur(6px);    /* blur what is behind overlay (modern browsers) */
+  background: rgba(0,0,0,0.45);  
+  backdrop-filter: blur(6px);   
   -webkit-backdrop-filter: blur(6px);
   padding: 24px;
 }
@@ -1382,8 +1382,8 @@ body.dark-mode .learn-more-btn {
   position: relative;
   background: #fff;
   width: min(720px, 96%);
-  max-height: calc(100vh - 80px); /* keep modal inside viewport */
-  overflow-y: auto;               /* allow internal scrolling */
+  max-height: calc(100vh - 80px); 
+  overflow-y: auto;              
   border-radius: 12px;
   box-shadow: 0 8px 30px rgba(0,0,0,0.3);
   padding: 22px;
@@ -1392,7 +1392,7 @@ body.dark-mode .learn-more-btn {
 
 /* Close button */
 .close-btn {
-  position: sticky; /* sticky so it stays visible if user scrolls inside modal */
+  position: sticky; 
   top: 10px;
   float: right;
   background: transparent;
@@ -1426,11 +1426,13 @@ body.modal-open {
 }
 
 /* Inline date selects */
-.event-date { display:flex; gap:8px; }
-.event-date select { flex:1; }
+.event-date , .event-time { display:flex; gap:8px; }
+.event-date , .event-time select { flex:1; }
+
+
 
 /* Submit */
-#bookNowBtn {
+#confirmBookingBtn {
   margin-top: 12px;
   padding: 12px;
   background:#a0522d;
@@ -1440,20 +1442,35 @@ body.modal-open {
   font-weight:700;
   cursor:pointer;
 }
-#bookNowBtn:hover { background:#8b4513; }
+#confirmBookingBtn:hover { background:#8b4513; }
 
 /* small animation */
 @keyframes modalPop { from { opacity:0; transform: translateY(6px) scale(.995) } to { opacity:1; transform: none } }
 
-/* Small scrollbar styling (optional) */
+
 .booking-content::-webkit-scrollbar { width:8px; }
 .booking-content::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.12); border-radius:8px; }
 
 .booking-content h2{
   text-align: center;;
 }
-/* Responsive tweak */
+/* Responsive */
 @media (max-width:420px) {
   .booking-content { padding:16px; }
   .close-btn { font-size:26px; }
+}
+
+/* Error message */
+.error-message {
+    display: block;            
+    color: red;                   
+    font-size: 0.9rem;       
+    margin-top: 4px;              
+    font-style: italic;          
+}
+
+/* For inputs with errors */
+input.error, select.error, textarea.error {
+    border: 1px solid red;        
+    background-color: #ffe6e6;    
 }

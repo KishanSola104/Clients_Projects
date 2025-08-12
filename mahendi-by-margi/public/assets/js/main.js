@@ -149,7 +149,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   setupToggle({ boxSelector: ".expertise-box", buttonId: "toggleViewBtn" });
   setupToggle({ boxSelector: ".my-work-box", buttonId: "toggleWorkViewBtn" });
- 
 
   // experince section animation
   const items = document.querySelectorAll(".experience-item");
@@ -168,70 +167,72 @@ document.addEventListener("DOMContentLoaded", () => {
 
   items.forEach((item) => observer.observe(item));
 
-//testinomals
-   const testimonials = document.querySelectorAll(".testimonial-card");
+  //testinomals
+  const testimonials = document.querySelectorAll(".testimonial-card");
 
-  const observer2 = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("visible");
-      }
-    });
-  }, { threshold: 0.2 });
+  const observer2 = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
+      });
+    },
+    { threshold: 0.2 }
+  );
 
-  testimonials.forEach(card => observer.observe(card));
+  testimonials.forEach((card) => observer.observe(card));
 
   function setupTestimonialsToggle() {
-  const btn = document.getElementById("toggletestimonialReadBtn");
-  const cards = document.querySelectorAll(".testimonial-card");
+    const btn = document.getElementById("toggletestimonialReadBtn");
+    const cards = document.querySelectorAll(".testimonial-card");
 
-  function updateView() {
-    const w = window.innerWidth;
-    btn.textContent = "Read More";
+    function updateView() {
+      const w = window.innerWidth;
+      btn.textContent = "Read More";
 
-    cards.forEach(card => card.classList.remove("hidden"));
+      cards.forEach((card) => card.classList.remove("hidden"));
 
-    if (w > 992) {
-      // Laptop: show all, hide button
-      btn.style.display = "none";
-    } else if (w > 600) {
-      // Tablet: show 4, hide 2
-      btn.style.display = "inline-block";
-      cards.forEach((card, i) => {
-        if (i >= 4) card.classList.add("hidden");
-      });
-    } else {
-      // Mobile: show 2, hide 4
-      btn.style.display = "inline-block";
-      cards.forEach((card, i) => {
-        if (i >= 2) card.classList.add("hidden");
-      });
+      if (w > 992) {
+        // Laptop: show all, hide button
+        btn.style.display = "none";
+      } else if (w > 600) {
+        // Tablet: show 4, hide 2
+        btn.style.display = "inline-block";
+        cards.forEach((card, i) => {
+          if (i >= 4) card.classList.add("hidden");
+        });
+      } else {
+        // Mobile: show 2, hide 4
+        btn.style.display = "inline-block";
+        cards.forEach((card, i) => {
+          if (i >= 2) card.classList.add("hidden");
+        });
+      }
     }
+
+    btn.addEventListener("click", () => {
+      const hiddenCards = document.querySelectorAll(".testimonial-card.hidden");
+      if (hiddenCards.length > 0) {
+        hiddenCards.forEach((card) => card.classList.remove("hidden"));
+        btn.textContent = "Read Less";
+      } else {
+        updateView();
+      }
+    });
+
+    window.addEventListener("resize", updateView);
+    updateView();
   }
 
-  btn.addEventListener("click", () => {
-    const hiddenCards = document.querySelectorAll(".testimonial-card.hidden");
-    if (hiddenCards.length > 0) {
-      hiddenCards.forEach(card => card.classList.remove("hidden"));
-      btn.textContent = "Read Less";
-    } else {
-      updateView();
-    }
-  });
+  setupTestimonialsToggle();
 
-  window.addEventListener("resize", updateView);
-  updateView();
-}
-
-setupTestimonialsToggle();
-
-
-/* FAQ */
- const faqItems = document.querySelectorAll(".faq-item");
+  /* FAQ */
+  const faqItems = document.querySelectorAll(".faq-item");
 
   const faqObserver = new IntersectionObserver(
-    entries => {
-      entries.forEach(entry => {
+    (entries) => {
+      entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add("visible");
           observer.unobserve(entry.target);
@@ -241,19 +242,22 @@ setupTestimonialsToggle();
     { threshold: 0.1 }
   );
 
-  faqItems.forEach(item => observer.observe(item));
+  faqItems.forEach((item) => observer.observe(item));
 
-// Book Now
-const section = document.querySelector(".book-now-section");
+  // Book Now
+  const section = document.querySelector(".book-now-section");
 
-  const bookNowObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        section.classList.add("visible");
-        observer.unobserve(section);
-      }
-    });
-  }, { threshold: 0.3 });
+  const bookNowObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          section.classList.add("visible");
+          observer.unobserve(section);
+        }
+      });
+    },
+    { threshold: 0.3 }
+  );
 
   observer.observe(section);
 
@@ -261,20 +265,20 @@ const section = document.querySelector(".book-now-section");
   (function(){
   const bookingModal = document.getElementById('booking-modal');
   const closeBtn = bookingModal.querySelector('.close-btn');
-  // change this selector to whatever class your "Book Now" buttons have in the site
+  
   const bookNowButtons = document.querySelectorAll('.book-now-btn');
 
-  // Utility: open modal
+  // open modal
   function openBookingModal() {
     bookingModal.style.display = 'flex';
     bookingModal.setAttribute('aria-hidden', 'false');
     document.body.classList.add('modal-open');
-    // focus first input for accessibility
+    // focus first input 
     const firstInput = bookingModal.querySelector('input, select, textarea');
     if (firstInput) firstInput.focus();
   }
 
-  // Utility: close modal
+  //  close modal
   function closeBookingModal() {
     bookingModal.style.display = 'none';
     bookingModal.setAttribute('aria-hidden', 'true');
@@ -292,7 +296,7 @@ const section = document.querySelector(".book-now-section");
   // Attach close events
   closeBtn.addEventListener('click', closeBookingModal);
 
-  // click outside the content (overlay) to close
+  // click outside the content  to close
   bookingModal.addEventListener('click', function (e) {
     if (e.target === bookingModal) closeBookingModal();
   });
@@ -304,7 +308,7 @@ const section = document.querySelector(".book-now-section");
     }
   });
 
-  // Dynamic "Any Other" event type logic (fixed)
+  //  "Any Other" event type 
   const eventTypeSelect = document.getElementById('eventType');
   const otherEventTypeContainer = document.getElementById('otherEventTypeContainer');
   const otherEventInput = document.getElementById('otherEventType');
@@ -321,8 +325,7 @@ const section = document.querySelector(".book-now-section");
     });
   }
 
-  // OPTIONAL: trap focus inside modal (basic)
-  // For production you may want a robust focus trap library; this is a simple helper:
+  //  trap focus inside modal 
   bookingModal.addEventListener('keydown', function(e) {
     if (e.key !== 'Tab') return;
     const focusable = bookingModal.querySelectorAll('a,button,input,select,textarea,[tabindex]:not([tabindex="-1"])');
@@ -334,8 +337,39 @@ const section = document.querySelector(".book-now-section");
 
 })();
 
-  
+// get all the forms components
+const txtFullname = document.getElementById("fullName");
+const stateDropdown = document.getElementById("state");
+const districtDropdown = document.getElementById("district");
+const txtAddress = document.getElementById("address");
+const pincode = document.getElementById("pincode");
+const mobile = document.getElementById("mobile");
+const altMobile = document.getElementById("altMobile");
+const email = document.getElementById("email");
+const eventYear = document.getElementById("eventYear");
+const eventMonth = document.getElementById("eventMonth");
+const eventDay = document.getElementById("eventDay");
+const eventHour = document.getElementById("eventHour");
+const eventMinute = document.getElementById("eventMinute");
+const eventPeriod = document.getElementById("eventPeriod");
+const eventType = document.getElementById("eventType");
+const otherEventType = document.getElementById("otherEventType");
+const eventSize = document.getElementById("eventSize");
+const message = document.getElementById("message");
+const submitBookingBtn = document.getElementById("bookNowBtn");
+
+fetch("/api/states")
+    .then(res => res.json())
+    .then(states => {
+        const stateSelect = document.getElementById("state");
+        states.forEach(state => {
+            const option = document.createElement("option");
+            option.value = state;
+            option.textContent = state;
+            stateDropdown.appendChild(option);
+        });
+    });
+
+
+
 });
-
-
- 

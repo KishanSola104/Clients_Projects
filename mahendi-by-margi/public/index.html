@@ -511,7 +511,122 @@
 
 
     <!-- Booking Modal -->
-  <div id="booking-modal" class="booking-modal" aria-hidden="true" role="dialog" aria-modal="true"></div>
+    <div id="booking-modal" class="booking-modal" aria-hidden="true" role="dialog" aria-modal="true">
+        <div class="booking-content">
+            <button type="button" class="close-btn" aria-label="Close">&times;</button>
+            <h2>Book Your Mehendi</h2>
+
+            <form id="bookingForm">
+                <!-- Full Name -->
+                <label for="fullName">Full Name<span>*</span></label>
+                <input type="text" id="fullName" name="fullName" required>
+                <span class="error-message" id="fullName-error"></span>
+
+                <!-- State -->
+                <label for="state">State<span>*</span></label>
+                <select id="state" name="state" required>
+                    <option value="">-- Select State --</option>
+                </select>
+                <span class="error-message" id="state-error"></span>
+
+                <!-- District -->
+                <label for="district">District<span>*</span></label>
+                <select id="district" name="district" required>
+                    <option value="">-- Select District --</option>
+                </select>
+                <span class="error-message" id="district-error"></span>
+
+                <!-- Address -->
+                <label for="address">Full Address<span>*</span></label>
+                <textarea id="address" name="address" rows="3" required></textarea>
+                <span class="error-message" id="fullAddress-error"></span>
+
+                <!-- Pincode -->
+                <label for="pincode">Pincode<span>*</span></label>
+                <input type="text" id="pincode" name="pincode" pattern="[0-9]{6}" inputmode="numeric" required>
+                <span class="error-message" id="pincode-error"></span>
+
+                <!-- Mobile -->
+                <label for="mobile">Mobile Number<span>*</span></label>
+                <input type="tel" id="mobile" name="mobile" pattern="[0-9]{10}" required>
+                <span class="error-message" id="mobile-error"></span>
+
+                <!-- Alt Mobile -->
+                <label for="altMobile">Alternate Mobile Number</label>
+                <input type="tel" id="altMobile" name="altMobile" pattern="[0-9]{10}">
+                <span class="error-message" id="altMobile-error"></span>
+
+                <!-- Email -->
+                <label for="email">Email Address<span>*</span></label>
+                <input type="email" id="email" name="email" required>
+                <span class="error-message" id="email-error"></span>
+
+                <!-- Event Date (Year / Month / Day) -->
+                <label for="eventDate">Event Date<span>*</span></label>
+                <div class="event-date">
+                    <select id="eventYear" name="eventYear" required>
+                        <option value="">Year</option>
+                    </select>
+                    <select id="eventMonth" name="eventMonth" required>
+                        <option value="">Month</option>
+                    </select>
+                    <select id="eventDay" name="eventDay" required>
+                        <option value="">Day</option>
+                    </select>
+                </div>
+
+                <!-- Event Time -->
+                <label for="eventTime">Event Time<span>*</span></label>
+                <div class="event-time">
+                    <select id="eventHour" name="eventHour" required>
+                        <option value="">Hour</option>
+                    </select>
+                    <select id="eventMinute" name="eventMinute" required>
+                        <option value="">Minute</option>
+                    </select>
+                    <select id="eventPeriod" name="eventPeriod" required>
+                        <option value="">AM/PM</option>
+                    </select>
+                </div>
+
+
+
+                <!-- Event Type -->
+                <label for="eventType">Type of Event<span>*</span></label>
+                <select id="eventType" name="eventType" required>
+                    <option value="">-- Select Event Type --</option>
+                    <option value="Bridal">Bridal</option>
+                    <option value="Corporate">Corporate</option>
+                    <option value="Festival">Festival</option>
+                    <option value="Baby Shower">Baby Shower</option>
+                    <option value="Party">Party</option>
+                    <option value="Engagement">Engagement</option>
+                    <option value="Other">Any Other</option>
+                </select>
+
+                <!-- Mention Event Type (shown only if "Any Other" selected) -->
+                <div id="otherEventTypeContainer" style="display:none;">
+                    <label for="otherEventType">Please Mention Event Type<span>*</span></label>
+                    <input type="text" id="otherEventType" name="otherEventType">
+                </div>
+
+                <!-- Event Size -->
+                <label for="eventSize">Event Size<span>*</span></label>
+                <select id="eventSize" name="eventSize" required>
+                    <option value="">-- Select Size --</option>
+                    <option value="Small">Small (1-5 people)</option>
+                    <option value="Medium">Medium (6-15 people)</option>
+                    <option value="Large">Large (15+ people)</option>
+                </select>
+
+                <!-- Message -->
+                <label for="message">Any Message</label>
+                <textarea id="message" name="message" rows="3"></textarea>
+
+                <button type="submit" id="confirmBookingBtn">Confirm Booking</button>
+            </form>
+        </div>
+    </div>
 
     <script src="/assets/js/main.js"></script>
 </body>
