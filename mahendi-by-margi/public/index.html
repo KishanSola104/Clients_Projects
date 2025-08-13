@@ -516,7 +516,7 @@
             <button type="button" class="close-btn" aria-label="Close">&times;</button>
             <h2>Book Your Mehendi</h2>
 
-            <form id="bookingForm">
+            <form id="bookingForm" novalidate>
                 <!-- Full Name -->
                 <label for="fullName">Full Name<span>*</span></label>
                 <input type="text" id="fullName" name="fullName" required>
@@ -574,20 +574,20 @@
                         <option value="">Day</option>
                     </select>
                 </div>
+                <span class="error-message" id="date-error"></span>
+
 
                 <!-- Event Time -->
                 <label for="eventTime">Event Time<span>*</span></label>
-                <div class="event-time">
-                    <select id="eventHour" name="eventHour" required>
-                        <option value="">Hour</option>
-                    </select>
-                    <select id="eventMinute" name="eventMinute" required>
-                        <option value="">Minute</option>
-                    </select>
-                    <select id="eventPeriod" name="eventPeriod" required>
-                        <option value="">AM/PM</option>
-                    </select>
-                </div>
+                <select id="eventTime" name="eventTime" required>
+                    <option value="">-- Select Event Time --</option>
+                    <option value="early-morning">Early Morning</option>
+                    <option value="afternoon">Afternoon</option>
+                    <option value="evening">Evening</option>
+                    <option value="late-night">Late Night</option>
+                </select>
+                <span class="error-message" id="time-error"></span>
+
 
 
 
@@ -603,12 +603,15 @@
                     <option value="Engagement">Engagement</option>
                     <option value="Other">Any Other</option>
                 </select>
+                <span class="error-message" id="event-type-error"></span>
 
                 <!-- Mention Event Type (shown only if "Any Other" selected) -->
                 <div id="otherEventTypeContainer" style="display:none;">
                     <label for="otherEventType">Please Mention Event Type<span>*</span></label>
                     <input type="text" id="otherEventType" name="otherEventType">
+                    <span class="error-message" id="otherEventType-error"></span>
                 </div>
+                
 
                 <!-- Event Size -->
                 <label for="eventSize">Event Size<span>*</span></label>
@@ -618,6 +621,7 @@
                     <option value="Medium">Medium (6-15 people)</option>
                     <option value="Large">Large (15+ people)</option>
                 </select>
+                <span class="error-message" id="eventSize-error"></span>
 
                 <!-- Message -->
                 <label for="message">Any Message</label>

@@ -261,115 +261,324 @@ document.addEventListener("DOMContentLoaded", () => {
 
   observer.observe(section);
 
-  /* Booking Modal */
-  (function(){
-  const bookingModal = document.getElementById('booking-modal');
-  const closeBtn = bookingModal.querySelector('.close-btn');
-  
-  const bookNowButtons = document.querySelectorAll('.book-now-btn');
+  /*  BOOKING MODAL  */
+  const bookingModal = document.getElementById("booking-modal");
+  const closeBtn = bookingModal.querySelector(".close-btn");
+  const bookNowButtons = document.querySelectorAll(".book-now-btn");
 
-  // open modal
-  function openBookingModal() {
-    bookingModal.style.display = 'flex';
-    bookingModal.setAttribute('aria-hidden', 'false');
-    document.body.classList.add('modal-open');
-    // focus first input 
-    const firstInput = bookingModal.querySelector('input, select, textarea');
+  const otherEventTypeContainer = document.getElementById(
+    "otherEventTypeContainer"
+  );
+  const otherEventTypeInput = document.getElementById("otherEventType");
+  const eventTypeSelect = document.getElementById("eventType");
+
+  const openBookingModal = () => {
+    bookingModal.style.display = "flex";
+    bookingModal.setAttribute("aria-hidden", "false");
+    document.body.classList.add("modal-open");
+
+    // Focus first input
+    const firstInput = bookingModal.querySelector("input, select, textarea");
     if (firstInput) firstInput.focus();
-  }
+  };
 
-  //  close modal
-  function closeBookingModal() {
-    bookingModal.style.display = 'none';
-    bookingModal.setAttribute('aria-hidden', 'true');
-    document.body.classList.remove('modal-open');
-  }
+  const closeBookingModal = () => {
+    bookingModal.style.display = "none";
+    bookingModal.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("modal-open");
+  };
 
-  // Attach open events
-  bookNowButtons.forEach(btn => {
-    btn.addEventListener('click', function (e) {
+  bookNowButtons.forEach((btn) =>
+    btn.addEventListener("click", (e) => {
       e.preventDefault();
       openBookingModal();
-    });
-  });
+    })
+  );
 
-  // Attach close events
-  closeBtn.addEventListener('click', closeBookingModal);
-
-  // click outside the content  to close
-  bookingModal.addEventListener('click', function (e) {
+  closeBtn.addEventListener("click", closeBookingModal);
+  bookingModal.addEventListener("click", (e) => {
     if (e.target === bookingModal) closeBookingModal();
   });
 
-  // close on Esc
-  window.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && bookingModal.getAttribute('aria-hidden') === 'false') {
+  window.addEventListener("keydown", (e) => {
+    if (
+      e.key === "Escape" &&
+      bookingModal.getAttribute("aria-hidden") === "false"
+    ) {
       closeBookingModal();
     }
   });
 
-  //  "Any Other" event type 
-  const eventTypeSelect = document.getElementById('eventType');
-  const otherEventTypeContainer = document.getElementById('otherEventTypeContainer');
-  const otherEventInput = document.getElementById('otherEventType');
-
-  if (eventTypeSelect) {
-    eventTypeSelect.addEventListener('change', function (e) {
-      if (e.target.value === 'Other') {
-        otherEventTypeContainer.style.display = 'block';
-        otherEventInput.required = true;
-      } else {
-        otherEventTypeContainer.style.display = 'none';
-        otherEventInput.required = false;
-      }
-    });
-  }
-
-  //  trap focus inside modal 
-  bookingModal.addEventListener('keydown', function(e) {
-    if (e.key !== 'Tab') return;
-    const focusable = bookingModal.querySelectorAll('a,button,input,select,textarea,[tabindex]:not([tabindex="-1"])');
+  // Focus trap
+  bookingModal.addEventListener("keydown", (e) => {
+    if (e.key !== "Tab") return;
+    const focusable = bookingModal.querySelectorAll(
+      'a,button,input,select,textarea,[tabindex]:not([tabindex="-1"])'
+    );
     if (!focusable.length) return;
-    const first = focusable[0], last = focusable[focusable.length -1];
-    if (e.shiftKey && document.activeElement === first) { last.focus(); e.preventDefault(); }
-    else if (!e.shiftKey && document.activeElement === last) { first.focus(); e.preventDefault(); }
+    const first = focusable[0],
+      last = focusable[focusable.length - 1];
+
+    if (e.shiftKey && document.activeElement === first) {
+      last.focus();
+      e.preventDefault();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      first.focus();
+      e.preventDefault();
+    }
   });
 
-})();
+  /*  FORM ELEMENTS  */
+  const bookingForm = document.getElementById("bookingForm");
+  const txtFullname = document.getElementById("fullName");
+  const stateDropdown = document.getElementById("state");
+  const districtDropdown = document.getElementById("district");
+  const txtAddress = document.getElementById("address");
+  const txtPincode = document.getElementById("pincode");
+  const txtMobile = document.getElementById("mobile");
+  const txtAltMobile = document.getElementById("altMobile");
+  const txtEmail = document.getElementById("email");
+  const eventYear = document.getElementById("eventYear");
+  const eventMonth = document.getElementById("eventMonth");
+  const eventDay = document.getElementById("eventDay");
+  const eventTime = document.getElementById("eventTime");
+  const eventSize = document.getElementById("eventSize");
 
-// get all the forms components
-const txtFullname = document.getElementById("fullName");
-const stateDropdown = document.getElementById("state");
-const districtDropdown = document.getElementById("district");
-const txtAddress = document.getElementById("address");
-const pincode = document.getElementById("pincode");
-const mobile = document.getElementById("mobile");
-const altMobile = document.getElementById("altMobile");
-const email = document.getElementById("email");
-const eventYear = document.getElementById("eventYear");
-const eventMonth = document.getElementById("eventMonth");
-const eventDay = document.getElementById("eventDay");
-const eventHour = document.getElementById("eventHour");
-const eventMinute = document.getElementById("eventMinute");
-const eventPeriod = document.getElementById("eventPeriod");
-const eventType = document.getElementById("eventType");
-const otherEventType = document.getElementById("otherEventType");
-const eventSize = document.getElementById("eventSize");
-const message = document.getElementById("message");
-const submitBookingBtn = document.getElementById("bookNowBtn");
+  /*  STATES & DISTRICTS */
+  const fetchStates = async () => {
+    try {
+      const res = await fetch("/api/states");
+      const data = await res.json();
+      const states = data.states.sort();
+      stateDropdown.innerHTML = '<option value="">-- Select State --</option>';
+      states.forEach((s) => {
+        const opt = document.createElement("option");
+        opt.value = s;
+        opt.textContent = s;
+        stateDropdown.appendChild(opt);
+      });
+    } catch (err) {
+      console.error("Error fetching states:", err);
+    }
+  };
 
-fetch("/api/states")
-    .then(res => res.json())
-    .then(states => {
-        const stateSelect = document.getElementById("state");
-        states.forEach(state => {
-            const option = document.createElement("option");
-            option.value = state;
-            option.textContent = state;
-            stateDropdown.appendChild(option);
-        });
-    });
+  const fetchDistricts = async (state) => {
+    districtDropdown.innerHTML =
+      '<option value="">-- Select District --</option>';
+    if (!state) return;
+    try {
+      const res = await fetch(
+        `/api/districts?state=${encodeURIComponent(state)}`
+      );
+      const { districts } = await res.json();
+      districts.forEach((d) => {
+        const opt = document.createElement("option");
+        opt.value = d;
+        opt.textContent = d;
+        districtDropdown.appendChild(opt);
+      });
+    } catch (err) {
+      console.error("Error fetching districts:", err);
+    }
+  };
 
+  stateDropdown.addEventListener("change", () =>
+    fetchDistricts(stateDropdown.value)
+  );
+  fetchStates();
 
+  /*  DATE DROPDOWNS  */
+  const daysInMonth = (month, year) => new Date(year, month, 0).getDate();
 
+  const fillYears = () => {
+    const currentYear = new Date().getFullYear();
+    eventYear.innerHTML = '<option value="">Year</option>';
+    for (let y = currentYear; y <= currentYear + 2; y++) {
+      const opt = document.createElement("option");
+      opt.value = y;
+      opt.textContent = y;
+      eventYear.appendChild(opt);
+    }
+  };
+
+  const fillMonths = () => {
+    eventMonth.innerHTML = '<option value="">Month</option>';
+    for (let m = 1; m <= 12; m++) {
+      const opt = document.createElement("option");
+      opt.value = m;
+      opt.textContent = m;
+      eventMonth.appendChild(opt);
+    }
+  };
+
+  const fillDays = (year, month) => {
+    eventDay.innerHTML = '<option value="">Day</option>';
+    if (!year || !month) return;
+    const totalDays = daysInMonth(month, year);
+    const today = new Date();
+    for (let d = 1; d <= totalDays; d++) {
+      const dateObj = new Date(year, month - 1, d);
+      if (dateObj < today) continue; // disable past dates
+      const opt = document.createElement("option");
+      opt.value = d;
+      opt.textContent = d;
+      eventDay.appendChild(opt);
+    }
+  };
+
+  fillYears();
+  fillMonths();
+  fillDays(new Date().getFullYear(), new Date().getMonth() + 1);
+
+  [eventYear, eventMonth].forEach((dd) =>
+    dd.addEventListener("change", () => {
+      fillDays(parseInt(eventYear.value), parseInt(eventMonth.value));
+    })
+  );
+
+  /*  OTHER EVENT TYPE  */
+  eventTypeSelect.addEventListener("change", () => {
+    if (eventTypeSelect.value === "Other") {
+      otherEventTypeContainer.style.display = "block";
+      otherEventTypeInput.required = true;
+    } else {
+      otherEventTypeContainer.style.display = "none";
+      otherEventTypeInput.value = "";
+      otherEventTypeInput.required = false;
+    }
+  });
+
+  /*  FORM VALIDATION */
+  const showError = (input, msg) => {
+    const span = document.getElementById(`${input.id}-error`);
+    if (span) span.textContent = msg;
+    input.classList.add("invalid");
+  };
+
+  const clearError = (input) => {
+    const span = document.getElementById(`${input.id}-error`);
+    if (span) span.textContent = "";
+    input.classList.remove("invalid");
+  };
+
+  const validateBookingForm = () => {
+    let valid = true;
+    const inputs = [
+      txtFullname,
+      stateDropdown,
+      districtDropdown,
+      txtAddress,
+      txtPincode,
+      txtMobile,
+      txtAltMobile,
+      txtEmail,
+      eventYear,
+      eventMonth,
+      eventDay,
+      eventTime,
+      eventTypeSelect,
+      otherEventTypeInput,
+      eventSize,
+    ];
+
+    inputs.forEach(clearError);
+
+    if (!txtFullname.value.trim() || !/^[a-zA-Z\s]+$/.test(txtFullname.value)) {
+      showError(txtFullname, "Enter valid name.");
+      valid = false;
+    }
+    if (!stateDropdown.value) {
+      showError(stateDropdown, "Select state.");
+      valid = false;
+    }
+    if (!districtDropdown.value) {
+      showError(districtDropdown, "Select district.");
+      valid = false;
+    }
+    if (!txtAddress.value.trim()) {
+      showError(txtAddress, "Enter address.");
+      valid = false;
+    }
+    if (!/^\d{6}$/.test(txtPincode.value.trim())) {
+      showError(txtPincode, "Enter 6-digit pincode.");
+      valid = false;
+    }
+    if (!/^\d{10}$/.test(txtMobile.value.trim())) {
+      showError(txtMobile, "Enter 10-digit mobile.");
+      valid = false;
+    }
+    if (txtAltMobile.value && !/^\d{10}$/.test(txtAltMobile.value.trim())) {
+      showError(txtAltMobile, "Enter 10-digit alternate mobile.");
+      valid = false;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(txtEmail.value.trim())) {
+      showError(txtEmail, "Enter valid email.");
+      valid = false;
+    }
+    if (!eventYear.value || !eventMonth.value || !eventDay.value) {
+      showError(eventYear, "Select valid date.");
+      valid = false;
+    }
+    if (!eventTime.value) {
+      showError(eventTime, "Select event time.");
+      valid = false;
+    }
+    if (!eventTypeSelect.value) {
+      showError(eventTypeSelect, "Select event type.");
+      valid = false;
+    }
+    if (eventTypeSelect.value === "Other") {
+      const value = otherEventTypeInput.value.trim();
+      if (!value) {
+        showError(otherEventTypeInput, "Specify event type.");
+        valid = false;
+      } else if (!/^[a-zA-Z\s]+$/.test(value)) {
+        showError(
+          otherEventTypeInput,
+          "Event type should contain only letters."
+        );
+        valid = false;
+      }
+    }
+
+    if (!eventSize.value) {
+      showError(eventSize, "Select event size.");
+      valid = false;
+    }
+
+    return valid;
+  };
+
+  /*  REAL-TIME VALIDATION  */
+  [
+    txtFullname,
+    txtPincode,
+    txtMobile,
+    txtAltMobile,
+    txtEmail,
+    otherEventTypeInput,
+  ].forEach((input) => {
+    input.addEventListener("input", () => clearError(input));
+  });
+
+  /*  FORM SUBMISSION  */
+  bookingForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    if (!validateBookingForm()) return;
+
+    let successMsg = document.getElementById("bookingSuccessMessage");
+    if (!successMsg) {
+      successMsg = document.createElement("div");
+      successMsg.id = "bookingSuccessMessage";
+      successMsg.style.color = "green";
+      successMsg.style.marginTop = "10px";
+      bookingForm.prepend(successMsg);
+    }
+    successMsg.textContent = "Booking submitted successfully!";
+
+    console.log("Form data ready to send.");
+
+    bookingForm.reset();
+    otherEventTypeContainer.style.display = "none";
+  });
 });

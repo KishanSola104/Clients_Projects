@@ -1,30 +1,71 @@
 import http from "http";
 import fs from "fs";
 import path from "path";
+import { parse } from "url";
 import { fileURLToPath } from "url";
+import { error } from "console";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const server = http.createServer((req, res) => {
-  // Normalize the request URL
-  const cleanUrl = req.url.split("?")[0].toLowerCase();
+  const parsedUrl = parse(req.url, true);
+  const pathname = parsedUrl.pathname;
 
-  // API route to serve states.json
-  if (req.url.startsWith("/data/") && req.method === "GET") {
-    const filePath = path.join(__dirname, req.url.replace(/^\/+/, ""));
+  // API Route: Return all states
+  if (pathname === "/api/states" && req.method === "GET") {
+    const dataPath = path.join(__dirname, "data", "states.json");
 
-    fs.readFile(filePath, "utf8", (err, data) => {
+    fs.readFile(dataPath, "utf8", (err, jsonData) => {
       if (err) {
-        res.writeHead(404, { "Content-Type": "application/json" });
-        res.end(JSON.stringify({ error: "File not found" }));
-      } else {
+        res.writeHead(500, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ error: "Unable to read states data" }));
+        return;
+      }
+
+      try {
+        const states = JSON.parse(jsonData);
         res.writeHead(200, { "Content-Type": "application/json" });
-        res.end(data);
+        res.end(JSON.stringify({ states }));
+      } catch (parseError) {
+        res.writeHead(500, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({error: "Error parsing states data" }));
       }
     });
     return;
   }
+
+
+  // API Route: Return districts based on selected state
+if (pathname.startsWith("/api/districts") && req.method === "GET") {
+  const selectedState = parsedUrl.query.state; 
+
+  const dataPath = path.join(__dirname, "data", "districts.json");
+
+  fs.readFile(dataPath, "utf8", (err, jsonData) => {
+    if (err) {
+      res.writeHead(500, { "Content-Type": "application/json" });
+      res.end(JSON.stringify({ error: "Unable to read district data" }));
+      return;
+    }
+
+    try {
+      const districts = JSON.parse(jsonData);
+      const stateDistricts = districts[selectedState] || [];
+
+      res.writeHead(200, { "Content-Type": "application/json" });
+      res.end(JSON.stringify({ districts: stateDistricts }));
+    } catch (parseError) {
+      res.writeHead(500, { "Content-Type": "application/json" });
+      res.end(JSON.stringify({ error: "Error parsing district data" }));
+    }
+  });
+
+  return;
+}
+
+
+
 
   // Serve static files
   let filePath = path.join(
