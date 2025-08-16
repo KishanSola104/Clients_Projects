@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Payment - Mehendi by Margi</title>
+    <link rel="stylesheet" href="assets/css/payment.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <div class="home">
+        <!-- Navbar -->
+        <div class="navbar">
+            <div class="home-large-text">Mahendi By Margi</div>
+        </div>
+
+    </div>
+
+
+    <main class="payment-container">
+        <div class="payment-card">
+            <h2>Pay to Confirm Booking</h2>
+            <p class="subtitle">Advance of ₹500 is required to confirm your booking.</p>
+
+            <!-- Payment Options -->
+            <div class="section">
+                <h3>Select Payment Method</h3>
+                <div class="payment-methods">
+                    <label><input type="radio" name="payment" value="upi"> UPI</label>
+                    <label><input type="radio" name="payment" value="card"> Credit/Debit Card</label>
+                    <label><input type="radio" name="payment" value="wallet"> Wallet</label>
+                    <label><input type="radio" name="payment" value="qr"> QR Code</label>
+                </div>
+            </div>
+
+            <!-- Pay Now Button -->
+            <button id="payNowBtn" class="primary-btn" disabled>Pay ₹500 Now</button>
+
+            <!-- Notices -->
+            <div class="section notices">
+                <h3>મહત્વપૂર્ણ નોટિસ </h3>
+                <ul>
+                    <li>તમારી બુકિંગ કન્ફર્મ કરવા માટે ₹500 ચૂકવવા પડશે.</li>
+                    <li>આ ₹500 તમારા ફાઇનલ પેમેન્ટમાંથી કાપી લેવામાં આવશે.</li>
+                    <li>આ ₹500 ફક્ત ત્યારે રિફંડ થશે જ્યારે ઇવેન્ટ કેન્સલ થશે અથવા અમે હાજર ન રહી શકીએ.</li>
+                </ul>
+
+                <h3>Important Notice</h3>
+                <ul>
+                    <li>You must pay ₹500 to confirm your booking.</li>
+                    <li>This ₹500 will be deducted from your final payment.</li>
+                    <li>This ₹500 will only be refunded if the event is cancelled or we cannot attend.</li>
+                </ul>
+            </div>
+
+            <!-- Cancel Booking -->
+            <button id="cancelBookingBtn" class="secondary-btn">Cancel Booking</button>
+        </div>
+    </main>
+
+   
+      <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <!-- Left: Contact -->
+            <div class="footer-left">
+                <h4 class="footer-title">Contact Us</h4>
+                <p class="footer-contact">
+                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                    <a href="mailto:mahendibymargi@gamil.com">mahendibymargi@gmail.com</a>
+                </p>
+                <p class="footer-contact">
+                    <a href="https://wa.me/91966234751" target="_blank">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp"
+                            id="whatsAppLink">
+                        (+91) 966234751
+                    </a>
+                </p>
+
+            </div>
+
+            <!-- Right: Social Links -->
+            <div class="footer-right">
+                <h4 class="footer-title">Follow Us</h4>
+                <div class="social-links" aria-label="social links">
+                    <a href="#" aria-label="Instagram" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Facebook" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Twitter" title="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="LinkedIn" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/payment.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,1 @@
+console.log("Payment js is loaded");
